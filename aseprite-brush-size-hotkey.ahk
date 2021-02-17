@@ -1,5 +1,5 @@
-; Very simple AHK script that tries to replicate the behaviour of WispY's AseBrush Java app, as shown in
-; AdamCYounis' Aseprite Crash Course video! YouTube link here: https://youtu.be/59Y6OTzNrhk
+; Very simple AHK script that tries to replicate the behaviour of WispY's AseBrush Java applet, as shown in
+; AdamCYounis' awesome Aseprite Crash Course video! YouTube link here: https://youtu.be/59Y6OTzNrhk
 
 
 ; -= How to use this =-
@@ -20,7 +20,7 @@ tick_rate = 15
 previous_tick_mouse_pos_x = 0
 previous_tick_mouse_pos_y = 0
 
-UpdateBrushSize(sensitivity)
+UpdateBrushSize()
 {
     global check_x_axis
     global previous_tick_mouse_pos_x
@@ -45,7 +45,7 @@ UpdateBrushSize(sensitivity)
         Send ^{WheelUp 1}
 }
 
-; You can change this key to whatever you want, just make sure to change it on line 52 as well
+; You can change this key to whatever you want, just make sure to change it on line 55 as well
 #IfWinActive ahk_exe Aseprite.exe
 d::
     SetTimer, checkMousePos, %tick_rate%
@@ -60,7 +60,7 @@ checkMousePos:
     global previous_tick_mouse_pos_x
     global previous_tick_mouse_pos_y
 
-    UpdateBrushSize(0.1)
+    UpdateBrushSize()
 
     MouseGetPos, local_x, local_y
     previous_tick_mouse_pos_x := local_x
