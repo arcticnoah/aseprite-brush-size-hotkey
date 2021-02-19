@@ -39,10 +39,10 @@ UpdateBrushSize()
 
     If (mouse_pos_difference > 0)
         ; Mouse position has increased, increase brush size (CTRL + Scroll Wheel Down)
-        Send ^{WheelDown 1}
+        SendInput {Text}+
     If (mouse_pos_difference < 0)
         ; Mouse position has decreased, decrease brush size (CTRL + Scroll Wheel Up)
-        Send ^{WheelUp 1}
+        SendInput {Text}-
 }
 
 ; You can change this key to whatever you want, just make sure to change it on line 55 as well

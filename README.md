@@ -34,7 +34,7 @@ How to run the script can be read [from the AHK documentation](https://www.autoh
 
 ## Planned Features
 
-- Fix issue with script sometimes scrolling rather than changing brush size (issue with tick rate being too high?)
-- Still be able to type lowercase D (you can workaround this for now, by turning `Caps Lock` **ON** and pressing `SHIFT + D`
-- Allow the script to increase the brush size in increments other than just one
-- Change the config variables from the system tray (not sure if this is possible. If it is, also look into keeping it persistent)
+- [x] Fix issue with script sometimes scrolling rather than changing brush size (issue with tick rate being too high?)
+- [ ] Still be able to type lowercase D (you can workaround this for now, by turning `Caps Lock` **ON** and pressing `SHIFT + D`
+- [ ] Allow the script to increase the brush size in increments other than just one
+- [ ] Change the config variables from the system tray (not sure if this is possible. If it is, also look into keeping it persistent)
