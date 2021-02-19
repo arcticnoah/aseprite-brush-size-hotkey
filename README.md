@@ -1,5 +1,9 @@
 # Aseprite Brush Size Hotkey
 
+<p align="center">
+    <img src="icon.png">
+</p>
+
 > A very simple AutoHotKey (AHK) script that tries to replicate the behaviour of WispY's AseBrush Java applet, as shown in  [AdamCYounis' awesome "Aseprite Crash Course" video!](https://youtu.be/59Y6OTzNrhk)
 
 ***Note:** This is my first AutoHotKey script, so it's not quite ideal but it works well enough that I thought I'd share it. You're more than welcome to fork/PR any changes to improve this!*
