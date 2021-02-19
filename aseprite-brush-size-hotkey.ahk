@@ -17,6 +17,7 @@ tick_rate = 15
 
 
 ; -= Main Script =-
+enable_hotkey := true
 previous_tick_mouse_pos_x = 0
 previous_tick_mouse_pos_y = 0
 
@@ -45,16 +46,28 @@ UpdateBrushSize()
         SendInput {Text}-
 }
 
-; You can change this key to whatever you want, just make sure to change it on line 55 as well
+; CTRL + ALT + D shortcut to toggle pause the script's functionality
+#IfWinActive ahk_exe Aseprite.exe
+^!d up::
+    global enable_hotkey
+
+    enable_hotkey := !enable_hotkey
+Return
+
+; You can change this key to whatever you want, just make sure to change it on line 68 as well
 #IfWinActive ahk_exe Aseprite.exe
 d::
-    SetTimer, checkMousePos, %tick_rate%
-return
+    global enable_hotkey
+
+    If enable_hotkey {
+        SetTimer, checkMousePos, %tick_rate%
+    }
+Return
 
 ; If you do change the key, make sure to keep the suffix 'up'
 d up::
     SetTimer, checkMousePos, off
-return
+Return
 
 checkMousePos:
     global previous_tick_mouse_pos_x
@@ -65,4 +78,4 @@ checkMousePos:
     MouseGetPos, local_x, local_y
     previous_tick_mouse_pos_x := local_x
     previous_tick_mouse_pos_y := local_y
-return
+Return
