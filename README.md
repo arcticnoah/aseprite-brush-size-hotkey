@@ -44,3 +44,4 @@ How to run the script can be read [from the AHK documentation](https://www.autoh
 - [x] Still be able to type lowercase `d` (you can now use `CTRL + ALT + D` to toggle pause the script)
 - [ ] Allow the script to increase the brush size in increments other than just one
 - [ ] Change the config variables from the system tray (not sure if this is possible. If it is, also look into keeping it persistent)
+- [ ] Just found out Aesprite scripting exists (even tho I've been using some extensions/scripts already, woops), try porting this into a script (would make it better + easier to use for everyone, including me!)
