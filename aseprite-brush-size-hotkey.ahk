@@ -15,9 +15,14 @@ check_x_axis := true
 ; lower means more sensitive/speedy and higher means less sensitive/speedy
 tick_rate = 15
 
+; amount of pixels the mouse moved during the hotkey being used, to check if the mouse moved
+; less than this value, meaning it'll send the usual input
+normal_key_threshold = 4
 
 ; -= Main Script =-
 enable_hotkey := true
+start_mouse_pos_x = 0
+start_mouse_pos_y = 0
 previous_tick_mouse_pos_x = 0
 previous_tick_mouse_pos_y = 0
 
@@ -29,6 +34,7 @@ UpdateBrushSize()
 
     MouseGetPos, current_tick_mouse_pos_x, current_tick_mouse_pos_y
 
+    ; Mouse position difference since last tick
     If check_x_axis {
         ; Checking X axis
         mouse_pos_difference := current_tick_mouse_pos_x - previous_tick_mouse_pos_x
@@ -38,10 +44,10 @@ UpdateBrushSize()
         mouse_pos_difference := current_tick_mouse_pos_y - previous_tick_mouse_pos_y
     }
 
-    If (mouse_pos_difference > 0)
+    If (mouse_pos_difference != 0 && mouse_pos_difference > 0)
         ; Mouse position has increased, increase brush size (CTRL + Scroll Wheel Down)
         SendInput {Text}+
-    If (mouse_pos_difference < 0)
+    Else If (mouse_pos_difference != 0 && mouse_pos_difference < 0)
         ; Mouse position has decreased, decrease brush size (CTRL + Scroll Wheel Up)
         SendInput {Text}-
 }
@@ -60,15 +66,35 @@ d::
     global enable_hotkey
 
     If enable_hotkey {
+        MouseGetPos, start_mouse_pos_x, start_mouse_pos_y
+        MouseGetPos, previous_tick_mouse_pos_x, previous_tick_mouse_pos_y
+
         SetTimer, checkMousePos, %tick_rate%
     }
 Return
 
-; If you do change the key, make sure to keep the suffix 'up'
+; If you do change the key, make sure to keep the suffix 'up' and the 
 d up::
+    ; Disable hotkey timer
     SetTimer, checkMousePos, off
+
+    ; Mouse position difference since start of hotkey
+    If check_x_axis {
+        ; Checking X axis
+        mouse_pos_difference := Abs(start_mouse_pos_x - previous_tick_mouse_pos_x)
+    }
+    Else {
+        ; Checking Y axis
+        mouse_pos_difference := Abs(start_mouse_pos_y - previous_tick_mouse_pos_y)
+    }
+
+    ; Check if the mouse moved past the threshold whilst the key was pressed
+    If (mouse_pos_difference < normal_key_threshold)
+        ; Didn't move, send the key as per usual
+        SendInput {Text}d
 Return
 
+; Hotkey timer tick function, called every tick whilst the hotkey is pressed
 checkMousePos:
     global previous_tick_mouse_pos_x
     global previous_tick_mouse_pos_y
