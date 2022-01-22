@@ -15,14 +15,8 @@ check_x_axis := true
 ; lower means more sensitive/speedy and higher means less sensitive/speedy
 tick_rate = 15
 
-; amount of pixels the mouse moved during the hotkey being used, to check if the mouse moved
-; less than this value, meaning it'll send the usual input
-normal_key_threshold = 4
-
 ; -= Main Script =-
 enable_hotkey := true
-start_mouse_pos_x = 0
-start_mouse_pos_y = 0
 previous_tick_mouse_pos_x = 0
 previous_tick_mouse_pos_y = 0
 
@@ -60,38 +54,26 @@ UpdateBrushSize()
     enable_hotkey := !enable_hotkey
 Return
 
-; You can change this key to whatever you want, just make sure to change it on line 68 as well
+; You can change this key to whatever you want, just make sure to change it on line 72 and 80 as well
 #IfWinActive ahk_exe Aseprite.exe
-d::
+$d::
     global enable_hotkey
 
-    If enable_hotkey {
-        MouseGetPos, start_mouse_pos_x, start_mouse_pos_y
+    If (enable_hotkey) {
         MouseGetPos, previous_tick_mouse_pos_x, previous_tick_mouse_pos_y
 
+        ; Send the key input as per usual, ensures typing isn't delayed
+        SendInput {Text}d
+        
         SetTimer, checkMousePos, %tick_rate%
     }
+    
 Return
 
 ; If you do change the key, make sure to keep the suffix 'up' and the 
-d up::
+$d up::
     ; Disable hotkey timer
     SetTimer, checkMousePos, off
-
-    ; Mouse position difference since start of hotkey
-    If check_x_axis {
-        ; Checking X axis
-        mouse_pos_difference := Abs(start_mouse_pos_x - previous_tick_mouse_pos_x)
-    }
-    Else {
-        ; Checking Y axis
-        mouse_pos_difference := Abs(start_mouse_pos_y - previous_tick_mouse_pos_y)
-    }
-
-    ; Check if the mouse moved past the threshold whilst the key was pressed
-    If (mouse_pos_difference < normal_key_threshold)
-        ; Didn't move, send the key as per usual
-        SendInput {Text}d
 Return
 
 ; Hotkey timer tick function, called every tick whilst the hotkey is pressed
