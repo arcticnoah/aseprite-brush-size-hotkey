@@ -31,6 +31,8 @@ Running the downloaded .exe will run the script in the background and will only 
     You can close the script at any time from the system tray, by right-clicking it!
 </h6>
 
+**Note:** This script never installs as a program, it is fully portable, so if it doesn't work/you don't need/want it anymore, you can just delete the `.exe` you downloaded!
+
 ### AHK Script Version
 
 **[Download Latest AHK Script](https://github.com/arcticnoah/aseprite-brush-size-hotkey/blob/main/aseprite-brush-size-hotkey.ahk) ([Requires AHK to be installed](https://www.autohotkey.com/))**
@@ -40,7 +42,7 @@ How to run the script can be read [from the AHK documentation](https://www.autoh
 ## Planned Features/Changes
 
 - [x] Fix issue with script sometimes scrolling rather than changing brush size (issue with tick rate being too high?)
-- [x] Still be able to type lowercase `d` (checks if the mouse moved below a configurable threshold (default: 4 pixels) or you can now use `CTRL + ALT + D` to toggle pause the script)
+- [ ] Still be able to type lowercase `d` (checks if the mouse moved below a configurable threshold (default: 4 pixels) or you can now use `CTRL + ALT + D` to toggle pause the script)
 - [ ] Allow the script to increase the brush size in increments other than just one
 - [ ] Change the config variables from the system tray (not sure if this is possible. If it is, also look into keeping it persistent)
 - [ ] Just found out Aesprite scripting exists (even tho I've been using some extensions/scripts already, woops), try porting this into a script (would make it better + easier to use for everyone, including me!)
